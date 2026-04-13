@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maeva — Formations Bien-être</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ══════════════════════════════
+       NAVIGATION
+  ══════════════════════════════ -->
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="#" class="nav__logo">Maeva <span>Bien-être</span></a>
+      <a href="#formations" class="btn btn--nav">Voir les formations</a>
+    </div>
+  </nav>
+
+  <!-- ══════════════════════════════
+       HERO
+  ══════════════════════════════ -->
+  <header class="hero">
+    <div class="hero__content">
+      <p class="hero__eyebrow">Transformez votre vie</p>
+      <h1 class="hero__title">Retrouvez l'équilibre&nbsp;<br>corps &amp; esprit</h1>
+      <p class="hero__subtitle">
+        Des formations en diététique individuelles par téléphone pour vous aider à retrouver
+        un équilibre alimentaire durable et améliorer votre bien-être au quotidien.
+      </p>
+      <div class="hero__cta">
+        <a href="#formations" class="btn btn--primary">Découvrir les formations</a>
+        <a href="#apropos" class="btn btn--ghost">En savoir plus</a>
+      </div>
+    </div>
+    <div class="hero__visual">
+      <div class="hero__image-wrapper">
+        <img src="assets/hero.jpg" alt="Femme en méditation" onerror="this.style.display='none'" />
+        <div class="hero__blob"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ══════════════════════════════
+       DIPLÔME
+  ══════════════════════════════ -->
+  <section class="diploma">
+    <div class="container">
+      <div class="diploma__card">
+        <div class="diploma__seal">🏅</div>
+        <div class="diploma__info">
+          <p class="diploma__label">Professionnel certifié</p>
+          <h3 class="diploma__name" id="diploma-name">Titre du diplôme — à compléter</h3>
+          <p class="diploma__org" id="diploma-org">Organisme certificateur — accrédité en France</p>
+        </div>
+        <a href="#" id="diploma-link" class="btn btn--ghost diploma__btn" target="_blank" rel="noopener noreferrer">
+          Vérifier mon accréditation →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════
+       PROBLÈME / SOLUTION
+  ══════════════════════════════ -->
+  <section class="problem">
+    <div class="container problem__grid">
+      <div class="problem__text">
+        <p class="section-eyebrow">Vous vous reconnaissez ?</p>
+        <h2 class="section-title">Votre alimentation vous échappe,<br>il est temps de changer.</h2>
+        <ul class="problem__list">
+          <li>Difficultés à maintenir un poids stable</li>
+          <li>Rapport compliqué avec la nourriture</li>
+          <li>Manque d'énergie et fatigue persistante</li>
+          <li>Habitudes alimentaires déséquilibrées</li>
+        </ul>
+        <p class="problem__solution">
+          Mes formations vous donnent des outils concrets et personnalisés pour retrouver
+          un équilibre alimentaire durable, adapté à votre mode de vie.
+        </p>
+        <a href="#formations" class="btn btn--primary">Je veux changer</a>
+      </div>
+      <div class="problem__cards">
+        <div class="feature-card">
+          <div class="feature-card__icon">🥗</div>
+          <h3>Équilibre alimentaire</h3>
+          <p>Des conseils personnalisés pour structurer vos repas sans frustration.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-card__icon">⚖️</div>
+          <h3>Gestion du poids</h3>
+          <p>Une approche durable, sans régime strict, adaptée à votre corps et votre rythme.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-card__icon">💡</div>
+          <h3>Éducation nutritionnelle</h3>
+          <p>Comprendre ce que vous mangez pour faire les bons choix au quotidien.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-card__icon">🌿</div>
+          <h3>Bien-être global</h3>
+          <p>L'alimentation comme levier d'énergie, de vitalité et de qualité de vie.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════
+       FORMATIONS
+  ══════════════════════════════ -->
+  <section id="formations" class="formations">
+    <div class="container">
+      <p class="section-eyebrow center">Mes formations</p>
+      <h2 class="section-title center">Choisissez votre formule</h2>
+      <p class="section-subtitle center">
+        Un accompagnement individuel entièrement par téléphone, pensé pour s'adapter à votre vie.
+      </p>
+
+      <div class="formations__grid">
+
+        <!-- Formule Simple — 1 mois -->
+        <article class="card" data-formation-id="simple-1m">
+          <div class="card__header card__header--green">
+            <span class="card__emoji">🌱</span>
+            <h3 class="card__title">Formule Simple</h3>
+            <p class="card__level">1 mois</p>
+          </div>
+          <div class="card__body">
+            <p class="card__desc" data-field="description">Un accompagnement d'un mois pour poser les bases de votre bien-être. Des séances régulières par téléphone adaptées à votre rythme de vie.</p>
+            <ul class="card__features">
+              <li>Séances hebdomadaires par téléphone</li>
+              <li>Exercices et outils personnalisés</li>
+              <li>Suivi entre les séances</li>
+            </ul>
+            <div class="card__price">
+              <span class="price__amount" data-field="price">197 €</span>
+              <span class="price__note">paiement unique</span>
+            </div>
+            <a href="#" class="btn btn--primary btn--full" data-field="stripeLink" target="_blank" rel="noopener noreferrer">S'inscrire</a>
+          </div>
+        </article>
+
+        <!-- Formule Simple — 3 mois -->
+        <article class="card card--featured" data-formation-id="simple-3m">
+          <div class="card__badge card__badge--gold">Meilleure valeur</div>
+          <div class="card__header card__header--sage">
+            <span class="card__emoji">🌿</span>
+            <h3 class="card__title">Formule Simple</h3>
+            <p class="card__level">3 mois</p>
+          </div>
+          <div class="card__body">
+            <p class="card__desc" data-field="description">Trois mois d'accompagnement pour ancrer durablement les changements dans votre quotidien. Le temps nécessaire pour une vraie transformation.</p>
+            <ul class="card__features">
+              <li>Séances hebdomadaires par téléphone</li>
+              <li>Exercices et outils personnalisés</li>
+              <li>Suivi entre les séances</li>
+              <li>Bilan mensuel de progression</li>
+            </ul>
+            <div class="card__price">
+              <span class="price__amount" data-field="price">497 €</span>
+              <span class="price__note" data-field="priceNote">ou 3 × 170 €</span>
+            </div>
+            <div class="card__payment-options">
+              <a href="#" class="btn btn--primary btn--full" data-field="stripeLink" target="_blank" rel="noopener noreferrer">Payer en 1 fois</a>
+              <a href="#" class="btn btn--ghost btn--full" data-field="stripeLinkInstalment" target="_blank" rel="noopener noreferrer">Payer en 3 fois</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Formule Complète — 1 mois -->
+        <article class="card" data-formation-id="complete-1m">
+          <div class="card__badge">Recommandé</div>
+          <div class="card__header card__header--lavender">
+            <span class="card__emoji">🌸</span>
+            <h3 class="card__title">Formule Complète</h3>
+            <p class="card__level">1 mois</p>
+          </div>
+          <div class="card__body">
+            <p class="card__desc" data-field="description">La formule complète intègre les séances téléphoniques et des vidéos de présentation pour mieux comprendre et appliquer chaque étape de votre parcours.</p>
+            <ul class="card__features">
+              <li>Séances hebdomadaires par téléphone</li>
+              <li>Vidéos de présentation des modules</li>
+              <li>Exercices et outils personnalisés</li>
+              <li>Suivi entre les séances</li>
+            </ul>
+            <div class="card__price">
+              <span class="price__amount" data-field="price">297 €</span>
+              <span class="price__note">paiement unique</span>
+            </div>
+            <a href="#" class="btn btn--primary btn--full" data-field="stripeLink" target="_blank" rel="noopener noreferrer">S'inscrire</a>
+          </div>
+        </article>
+
+        <!-- Formule Complète — 3 mois -->
+        <article class="card" data-formation-id="complete-3m">
+          <div class="card__header card__header--gold">
+            <span class="card__emoji">🦋</span>
+            <h3 class="card__title">Formule Complète</h3>
+            <p class="card__level">3 mois</p>
+          </div>
+          <div class="card__body">
+            <p class="card__desc" data-field="description">L'accompagnement le plus complet sur trois mois. Séances téléphoniques, vidéos de présentation et suivi renforcé pour une transformation profonde et durable.</p>
+            <ul class="card__features">
+              <li>Séances hebdomadaires par téléphone</li>
+              <li>Vidéos de présentation des modules</li>
+              <li>Exercices et outils personnalisés</li>
+              <li>Suivi renforcé entre les séances</li>
+              <li>Bilan mensuel de progression</li>
+            </ul>
+            <div class="card__price">
+              <span class="price__amount" data-field="price">797 €</span>
+              <span class="price__note" data-field="priceNote">ou 3 × 275 €</span>
+            </div>
+            <div class="card__payment-options">
+              <a href="#" class="btn btn--primary btn--full" data-field="stripeLink" target="_blank" rel="noopener noreferrer">Payer en 1 fois</a>
+              <a href="#" class="btn btn--ghost btn--full" data-field="stripeLinkInstalment" target="_blank" rel="noopener noreferrer">Payer en 3 fois</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════
+       À PROPOS
+  ══════════════════════════════ -->
+  <section id="apropos" class="apropos">
+    <div class="container apropos__grid">
+      <div class="apropos__image-wrapper">
+        <img src="assets/maeva.jpg" alt="Photo de Maeva" onerror="this.style.display='none'" />
+        <div class="apropos__badge">
+          <strong>10 ans</strong>
+          <span>d'expérience</span>
+        </div>
+      </div>
+      <div class="apropos__text">
+        <p class="section-eyebrow">Votre formatrice</p>
+        <h2 class="section-title">Bonjour, je suis Maeva</h2>
+        <p>
+          Diététicienne certifiée, j'accompagne depuis plusieurs années des femmes et des hommes
+          qui souhaitent retrouver un équilibre alimentaire durable, sans régime contraignant
+          et sans culpabilité.
+        </p>
+        <p>
+          Mon approche est simple : vous donner les clés pour mieux manger au quotidien,
+          selon votre situation personnelle, vos habitudes et vos objectifs.
+          La formation se fait entièrement par téléphone, à votre rythme.
+        </p>
+        <div class="apropos__credentials">
+          <div class="credential">
+            <span class="credential__icon">🎓</span>
+            <span id="diploma-name-apropos">Diplôme de diététicienne — à compléter</span>
+          </div>
+        </div>
+        <a href="#formations" class="btn btn--primary">Voir les formules</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════
+       PROCESSUS
+  ══════════════════════════════ -->
+  <section class="process">
+    <div class="container">
+      <p class="section-eyebrow center">Comment ça marche</p>
+      <h2 class="section-title center">Votre parcours en 3 étapes</h2>
+      <div class="process__steps">
+        <div class="step">
+          <div class="step__number">01</div>
+          <h3>Choisissez votre formule</h3>
+          <p>Sélectionnez la formule et la durée adaptées à vos objectifs.</p>
+        </div>
+        <div class="step__arrow">→</div>
+        <div class="step">
+          <div class="step__number">02</div>
+          <h3>Payez en toute sécurité</h3>
+          <p>Règlement en ligne via Stripe. En une fois ou en 3 fois pour les formules 3 mois.</p>
+        </div>
+        <div class="step__arrow">→</div>
+        <div class="step">
+          <div class="step__number">03</div>
+          <h3>On vous appelle</h3>
+          <p>Maeva vous contacte pour planifier votre première séance téléphonique.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════
+       FAQ
+  ══════════════════════════════ -->
+  <section class="faq">
+    <div class="container faq__inner">
+      <p class="section-eyebrow center">Questions fréquentes</p>
+      <h2 class="section-title center">Vous avez des questions ?</h2>
+
+      <div class="faq__list">
+        <details class="faq__item">
+          <summary>Comment se déroule la formation ?</summary>
+          <p>La formation se déroule entièrement par téléphone. Après votre inscription, Maeva vous contacte pour planifier vos séances selon vos disponibilités.</p>
+        </details>
+        <details class="faq__item">
+          <summary>Quelle est la différence entre Simple et Complète ?</summary>
+          <p>La formule Simple comprend les séances téléphoniques et les exercices personnalisés. La formule Complète y ajoute des vidéos de présentation pour mieux comprendre et intégrer chaque module.</p>
+        </details>
+        <details class="faq__item">
+          <summary>Puis-je payer en plusieurs fois ?</summary>
+          <p>Oui, les formules 3 mois peuvent être réglées en 3 fois. L'option apparaît directement lors de votre inscription.</p>
+        </details>
+        <details class="faq__item">
+          <summary>Combien de temps durent les séances ?</summary>
+          <p>Les séances durent généralement entre 45 minutes et 1 heure, à raison d'une session par semaine.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════
+       CTA FINAL
+  ══════════════════════════════ -->
+  <section class="cta-final">
+    <div class="container cta-final__inner">
+      <h2>Prête(e) à commencer votre transformation ?</h2>
+      <p>Un accompagnement personnalisé, entièrement par téléphone, à votre rythme.</p>
+      <a href="#formations" class="btn btn--light">Choisir ma formule</a>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════
+       CONTACT
+  ══════════════════════════════ -->
+  <section id="contact" class="contact">
+    <div class="container contact__simple">
+      <p class="section-eyebrow center">Contact</p>
+      <h2 class="section-title center">Une question ?</h2>
+      <p class="contact__subtitle">Je réponds personnellement dans les 24h ouvrées.</p>
+      <div class="contact__items">
+        <a href="#" class="contact__item" id="contact-tel-link">
+          <span class="contact__icon">📞</span>
+          <span id="contact-tel"></span>
+        </a>
+        <a href="#" class="contact__item" id="contact-email-link">
+          <span class="contact__icon">✉️</span>
+          <span id="contact-email"></span>
+        </a>
+        <a href="#" class="contact__item" id="contact-instagram-link" target="_blank" rel="noopener noreferrer">
+          <span class="contact__icon">📷</span>
+          <span id="contact-instagram"></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════
+       FOOTER
+  ══════════════════════════════ -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <a href="#" class="nav__logo">Maeva <span>Bien-être</span></a>
+        <p>Transformez votre vie, un pas à la fois.</p>
+      </div>
+      <nav class="footer__nav">
+        <a href="#formations">Formations</a>
+        <a href="#apropos">À propos</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="footer__legal">
+        <a href="#">Mentions légales</a>
+        <a href="#">CGV</a>
+        <a href="#">Politique de confidentialité</a>
+      </div>
+    </div>
+    <p class="footer__copy">© 2026 Maeva Bien-être — Tous droits réservés</p>
+  </footer>
+
+  <!-- Firebase SDK (compat) -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
+
+  <script src="script.js"></script>
+</body>
+</html>

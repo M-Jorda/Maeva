@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — Maeva Bien-être</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body class="admin-body">
+
+  <!-- ══════════════════════════════
+       ÉCRAN DE CONNEXION
+  ══════════════════════════════ -->
+  <div id="admin-login" class="admin-login">
+    <div class="admin-login__card">
+      <a href="/" class="nav__logo" style="margin-bottom:.5rem">Maeva <span>Bien-être</span></a>
+      <h1>Administration</h1>
+      <form id="login-form" class="admin-form">
+        <div class="form-group">
+          <label for="admin-email">E-mail</label>
+          <input type="email" id="admin-email" autocomplete="email" required />
+        </div>
+        <div class="form-group">
+          <label for="admin-password">Mot de passe</label>
+          <input type="password" id="admin-password" autocomplete="current-password" required />
+        </div>
+        <p id="login-error" class="admin-error" hidden></p>
+        <button type="submit" class="btn btn--primary btn--full">Se connecter</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════
+       DASHBOARD
+  ══════════════════════════════ -->
+  <div id="admin-dashboard" hidden>
+
+    <header class="admin-header">
+      <a href="/" class="nav__logo">Maeva <span>Bien-être</span></a>
+      <span class="admin-header__title">Panneau d'administration</span>
+      <button id="logout-btn" class="btn btn--ghost">Déconnexion</button>
+    </header>
+
+    <main class="admin-main">
+
+      <!-- Coordonnées -->
+      <section class="admin-section">
+        <h2>Coordonnées</h2>
+        <p style="color:var(--text-muted);font-size:.9rem;margin-bottom:1.5rem">
+          Les coordonnées sont injectées depuis le code source (protégées contre les bots).
+          Remplir ici uniquement si vous souhaitez les mettre à jour sans modifier le code.
+        </p>
+        <div class="admin-form">
+          <div class="form-group">
+            <label for="field-tel">Téléphone (ex : +33 6 00 00 00 00)</label>
+            <input type="tel" id="field-tel" />
+          </div>
+          <div class="form-group">
+            <label for="field-email">E-mail</label>
+            <input type="email" id="field-email" />
+          </div>
+          <div class="form-group">
+            <label for="field-instagram">Instagram (ex : @maeva.bienetre)</label>
+            <input type="text" id="field-instagram" />
+          </div>
+          <div class="admin-save-row">
+            <button class="btn btn--primary" id="save-contact-btn">Enregistrer</button>
+            <p class="admin-save-msg" id="contact-save-msg">Enregistré ✓</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Diplôme -->
+      <section class="admin-section">
+        <h2>Diplôme / Accréditation</h2>
+        <div class="admin-form">
+          <div class="form-group">
+            <label for="field-diploma-name">Nom du diplôme</label>
+            <input type="text" id="field-diploma-name" placeholder="Ex : Diplôme de Coach Certifié" />
+          </div>
+          <div class="form-group">
+            <label for="field-diploma-org">Organisme certificateur</label>
+            <input type="text" id="field-diploma-org" placeholder="Ex : ICF France" />
+          </div>
+          <div class="form-group">
+            <label for="field-diploma-url">Lien vers la liste officielle</label>
+            <input type="url" id="field-diploma-url" placeholder="https://..." />
+          </div>
+          <div class="admin-save-row">
+            <button class="btn btn--primary" id="save-diploma-btn">Enregistrer</button>
+            <p class="admin-save-msg" id="diploma-save-msg">Enregistré ✓</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Formules -->
+      <section class="admin-section">
+        <h2>Formules &amp; tarifs</h2>
+        <p style="color:var(--text-muted);font-size:.9rem;margin-bottom:1.5rem">
+          Les liens Stripe sont des Payment Links créés dans votre tableau de bord Stripe
+          (format : <code>https://buy.stripe.com/xxx</code>).
+        </p>
+        <div id="formations-editor"></div>
+        <div class="admin-save-row">
+          <button class="btn btn--primary" id="save-formations-btn">Enregistrer les formules</button>
+          <p class="admin-save-msg" id="formations-save-msg">Enregistré ✓</p>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
+
+  <script>
+    /* ══════════════════════════════════════
+       CONFIG FIREBASE
+       Remplacer par vos valeurs Firebase Console > Paramètres du projet
+    ══════════════════════════════════════ */
+    const FIREBASE_CONFIG = {
+      apiKey:            "VOTRE_API_KEY",
+      authDomain:        "votre-projet.firebaseapp.com",
+      projectId:         "votre-projet-id",
+      storageBucket:     "votre-projet.appspot.com",
+      messagingSenderId: "000000000000",
+      appId:             "1:000000000000:web:0000000000000000"
+    };
+
+    /* ══════════════════════════════════════
+       MÉTADONNÉES DES FORMULES
+    ══════════════════════════════════════ */
+    const FORMATIONS_META = [
+      { id: 'simple-1m',   label: 'Formule Simple — 1 mois',   hasInstalment: false },
+      { id: 'simple-3m',   label: 'Formule Simple — 3 mois',   hasInstalment: true  },
+      { id: 'complete-1m', label: 'Formule Complète — 1 mois', hasInstalment: false },
+      { id: 'complete-3m', label: 'Formule Complète — 3 mois', hasInstalment: true  },
+    ];
+
+    /* ══════════════════════════════════════
+       INITIALISATION
+    ══════════════════════════════════════ */
+    if (!firebase.apps.length) {
+      firebase.initializeApp(FIREBASE_CONFIG);
+    }
+    const auth = firebase.auth();
+    const db   = firebase.firestore();
+
+    buildFormationsEditor();
+
+    /* Écoute de l'état de connexion */
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        document.getElementById('admin-login').hidden     = true;
+        document.getElementById('admin-dashboard').hidden = false;
+        loadAdminData();
+      } else {
+        document.getElementById('admin-login').hidden     = false;
+        document.getElementById('admin-dashboard').hidden = true;
+      }
+    });
+
+    /* ══════════════════════════════════════
+       CONNEXION / DÉCONNEXION
+    ══════════════════════════════════════ */
+    document.getElementById('login-form').addEventListener('submit', async e => {
+      e.preventDefault();
+      const errorEl = document.getElementById('login-error');
+      errorEl.hidden = true;
+      try {
+        await auth.signInWithEmailAndPassword(
+          document.getElementById('admin-email').value,
+          document.getElementById('admin-password').value
+        );
+      } catch {
+        errorEl.textContent = 'Identifiants incorrects. Veuillez réessayer.';
+        errorEl.hidden = false;
+      }
+    });
+
+    document.getElementById('logout-btn').addEventListener('click', () => auth.signOut());
+
+    /* ══════════════════════════════════════
+       CHARGEMENT DES DONNÉES
+    ══════════════════════════════════════ */
+    async function loadAdminData() {
+      try {
+        const [contactSnap, diplomaSnap, formationsSnap] = await Promise.all([
+          db.collection('config').doc('contact').get(),
+          db.collection('config').doc('diploma').get(),
+          db.collection('config').doc('formations').get(),
+        ]);
+
+        if (contactSnap.exists) {
+          const d = contactSnap.data();
+          setValue('field-tel', d.tel);
+          setValue('field-email', d.email);
+          setValue('field-instagram', d.instagram);
+        }
+
+        if (diplomaSnap.exists) {
+          const d = diplomaSnap.data();
+          setValue('field-diploma-name', d.name);
+          setValue('field-diploma-org', d.org);
+          setValue('field-diploma-url', d.url);
+        }
+
+        if (formationsSnap.exists) {
+          const items = formationsSnap.data().items || [];
+          items.forEach(item => {
+            setValue(`f-${item.id}-price`,  item.price);
+            setValue(`f-${item.id}-desc`,   item.description);
+            setValue(`f-${item.id}-link`,   item.stripeLink);
+            setValue(`f-${item.id}-link3x`, item.stripeLinkInstalment);
+          });
+        }
+      } catch (e) {
+        console.error('Erreur chargement Firestore:', e);
+      }
+    }
+
+    /* ══════════════════════════════════════
+       CONSTRUCTEUR DE L'ÉDITEUR FORMULES
+    ══════════════════════════════════════ */
+    function buildFormationsEditor() {
+      const container = document.getElementById('formations-editor');
+      container.innerHTML = FORMATIONS_META.map(f => `
+        <div class="admin-formation">
+          <h3>${f.label}</h3>
+          <div class="admin-form">
+            <div class="form-group">
+              <label>Prix affiché (ex : 197 €)</label>
+              <input type="text" id="f-${f.id}-price" />
+            </div>
+            <div class="form-group">
+              <label>Description courte</label>
+              <textarea id="f-${f.id}-desc" rows="2"></textarea>
+            </div>
+            <div class="form-group">
+              <label>Lien Stripe — paiement en 1 fois</label>
+              <input type="url" id="f-${f.id}-link" placeholder="https://buy.stripe.com/..." />
+            </div>
+            ${f.hasInstalment ? `
+            <div class="form-group">
+              <label>Lien Stripe — paiement en 3 fois</label>
+              <input type="url" id="f-${f.id}-link3x" placeholder="https://buy.stripe.com/..." />
+            </div>
+            ` : ''}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    /* ══════════════════════════════════════
+       SAUVEGARDE
+    ══════════════════════════════════════ */
+    document.getElementById('save-contact-btn').addEventListener('click', async () => {
+      await db.collection('config').doc('contact').set({
+        tel:       document.getElementById('field-tel').value.trim(),
+        email:     document.getElementById('field-email').value.trim(),
+        instagram: document.getElementById('field-instagram').value.trim(),
+      });
+      showSaveMsg('contact-save-msg');
+    });
+
+    document.getElementById('save-diploma-btn').addEventListener('click', async () => {
+      await db.collection('config').doc('diploma').set({
+        name: document.getElementById('field-diploma-name').value.trim(),
+        org:  document.getElementById('field-diploma-org').value.trim(),
+        url:  document.getElementById('field-diploma-url').value.trim(),
+      });
+      showSaveMsg('diploma-save-msg');
+    });
+
+    document.getElementById('save-formations-btn').addEventListener('click', async () => {
+      const items = FORMATIONS_META.map(f => {
+        const obj = {
+          id:          f.id,
+          price:       getVal(`f-${f.id}-price`),
+          description: getVal(`f-${f.id}-desc`),
+          stripeLink:  getVal(`f-${f.id}-link`),
+        };
+        if (f.hasInstalment) {
+          obj.stripeLinkInstalment = getVal(`f-${f.id}-link3x`);
+        }
+        return obj;
+      });
+      await db.collection('config').doc('formations').set({ items });
+      showSaveMsg('formations-save-msg');
+    });
+
+    /* ══════════════════════════════════════
+       HELPERS
+    ══════════════════════════════════════ */
+    function getVal(id) {
+      return document.getElementById(id)?.value.trim() || '';
+    }
+    function setValue(id, val) {
+      const el = document.getElementById(id);
+      if (el && val !== undefined) el.value = val;
+    }
+    function showSaveMsg(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.classList.add('show');
+      setTimeout(() => el.classList.remove('show'), 3000);
+    }
+  </script>
+</body>
+</html>
